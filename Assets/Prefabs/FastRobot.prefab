@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7355705730166061671}
   - component: {fileID: 8619766902095923425}
   - component: {fileID: 3371266052378014697}
+  - component: {fileID: 876709778395955966}
   m_Layer: 0
   m_Name: FastRobot
   m_TagString: Untagged
@@ -145,3 +146,22 @@ MonoBehaviour:
   speed: 3
   vertical: 0
   changeTime: 3
+--- !u!95 &876709778395955966
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299615407682797637}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3ea0965738dd8d942b0ec3c573f8e599, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
