@@ -100,6 +100,8 @@ MonoBehaviour:
   Speed: 3
   BulletLaunchForce: 300
   ProjectilePrefab: {fileID: 0}
+  HitEffectPrefab: {fileID: 3230605778946026898, guid: 7cf0100eabac081479f5b2e15b837ac2,
+    type: 3}
   timeInvincible: 2
 --- !u!50 &2809012816298355365
 Rigidbody2D:

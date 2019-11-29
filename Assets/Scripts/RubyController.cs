@@ -9,6 +9,7 @@ public class RubyController : MonoBehaviour
     public float BulletLaunchForce = 300f;
     public int Health { get { return this.currentHealth; } }
     public GameObject ProjectilePrefab;
+    public GameObject HitEffectPrefab;
 
     int currentHealth;
     Rigidbody2D rigidbody2d;
@@ -78,6 +79,7 @@ public class RubyController : MonoBehaviour
         if (amount < 0)
         {
             animator.SetTrigger("Hit");
+            GameObject hitEffectObject = Instantiate(HitEffectPrefab, rigidbody2d.position + Vector2.up * 2f, Quaternion.identity);
 
             if (isInvincible)
                 return;
