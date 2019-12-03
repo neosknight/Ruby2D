@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class RubyController : MonoBehaviour
 {
+    #region Properties
+
+    #region Public Properties
     public int MaxHealth = 5;
     public float Speed = 3.0f;
     public float BulletLaunchForce = 300f;
     public int Health { get { return this.currentHealth; } }
     public GameObject ProjectilePrefab;
     public GameObject HitEffectPrefab;
+    public AudioClip hitAudio;
+    public AudioClip throwAudio;
+    #endregion
 
+    #region Private Properties
     int currentHealth;
     Rigidbody2D rigidbody2d;
     Animator animator;
+    AudioSource audioSource;
 
     public float timeInvincible = 2.0f;
     bool isInvincible;
@@ -21,12 +29,16 @@ public class RubyController : MonoBehaviour
     float deltaX;
     float deltaY;
     Vector2 lookDirection = new Vector2(1, 0);
+    #endregion
+
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
         currentHealth = MaxHealth;
     }
@@ -72,6 +84,19 @@ public class RubyController : MonoBehaviour
         {
             Launch();
         }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, LayerMask.GetMask("NPC"));
+            if (hit.collider != null)
+            {
+                NonPlayableCharacter character = hit.collider.GetComponent<NonPlayableCharacter>();
+                if (character != null)
+                {
+                    character.DisplayDialog();
+                }
+            }
+        }
     }
 
     public void ChangeHealth(int amount)
@@ -86,6 +111,7 @@ public class RubyController : MonoBehaviour
 
             isInvincible = true;
             invincibleTimer = timeInvincible;
+            this.PlaySound(hitAudio);
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, MaxHealth);
@@ -100,5 +126,11 @@ public class RubyController : MonoBehaviour
         projectile.Launch(lookDirection, BulletLaunchForce);
 
         animator.SetTrigger("Launch");
+        this.PlaySound(throwAudio);
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }
